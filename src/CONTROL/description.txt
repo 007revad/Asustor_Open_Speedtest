@@ -1,1 +1,1 @@
-Asustor app to install OpenSpeedTest and run it in a GUI to test your LAN speeds. 
+Asustor app to install OpenSpeedTest and run it in a GUI to test your LAN speeds.
