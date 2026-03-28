@@ -9,7 +9,7 @@
 
 ### Description
 
-Asustor app to install Open Speedtest and run it in a GUI.
+Asustor app to install Open Speedtest and run it in a GUI to test your LAN speed.
 
 ### Download the package
 
