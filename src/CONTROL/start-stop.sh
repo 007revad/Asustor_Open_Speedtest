@@ -5,8 +5,12 @@ PIDFILE="${PKG_DIR}/var/httpd.pid"
 
 case "$1" in
     start)
+        if [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
+            echo "$NAME is already running"
+            exit 0
+        fi
         echo "Starting $NAME"
-        python3 "${PKG_DIR}/bin/httpd.py" 39876 "${PKG_DIR}/webman" \
+        python3 "${PKG_DIR}/bin/httpd.py" 39877 "${PKG_DIR}/webman" \
             > "${PKG_DIR}/var/httpd.log" 2>&1 &
         echo $! > "$PIDFILE"
     ;;

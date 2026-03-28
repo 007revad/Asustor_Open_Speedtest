@@ -1,192 +1,350 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Asustor Open Speedtest</title>
-    <meta charset="utf-8">
-    <script src="ansi_up.js"></script>
-    <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            margin: 20px; 
-            background-color: #f5f5f5;
-        }
-        .container { 
-            max-width: 1200px; 
-            margin: 0 auto; 
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        .header { 
-            background: linear-gradient(135deg, #0066cc, #004499); 
-            color: white; 
-            padding: 20px; 
-            border-radius: 8px 8px 0 0; 
-        }
-        .header h1 {
-            margin: 0 0 0 0;
-            font-size: 28px;
-        }
-        .header p {
-            margin: 0;
-            opacity: 0.9;
-        }
-        .info-panel { 
-            background: #e8f4f8; 
-            border-left: 4px solid #0066cc; 
-            padding: 15px; 
-            margin: 20px; 
-        }
-        .info-panel h3 {
-            margin: 0 0 10px 0;
-            color: #0066cc;
-        }
-        .system-info {
-            display: grid;
-            grid-template-columns: auto 1fr;
-            gap: 15px;
-            font-size: 14px;
-        }
-        .system-info strong {
-            color: #0066cc;
-            min-width: 120px;
-        }
-        .smart-section {
-            margin: 20px;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background: #fafafa;
-        }
-        .smart-section h2 {
-            color: #0066cc;
-            margin: 0 0 20px 0;
-            font-size: 20px;
-        }
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #0066cc;
-            font-weight: bold;
-        }
-        select {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border-radius: 4px;
-            border: 1px solid #ddd;
-            font-size: 16px;
-        }
-        button {
-            background-color: #0066cc;
-            border: none;
-            color: white;
-            padding: 12px 30px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-        }
-        button:hover {
-            background-color: #004a99;
-        }
-        button:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
-        }
-        .status {
-            margin: 20px 0;
-            padding: 10px;
-            border-radius: 4px;
-            font-weight: bold;
-        }
-        .status.success {
-            color: #008800;
-            background: #e6ffe6;
-            border: 1px solid #ccffcc;
-        }
-        .status.error {
-            color: #cc0000;
-            background: #ffe6e6;
-            border: 1px solid #ffcccc;
-        }
-        .status.warning {
-            color: #cc6600;
-            background: #fff3e6;
-            border: 1px solid #ffe6cc;
-        }
-        .status.info {
-            color: #0066cc;
-            background: #e6f3ff;
-            border: 1px solid #cce6ff;
-        }
-        .output {
-            white-space: pre-wrap; /* Maintain line breaks */
-            font-family: Arial, sans-serif;  /* changed from monospace */
-            font-size: 16px;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            background: #fafafa;
-            min-height: 300px;
-            overflow: auto;
-        }        
-        .speedtest-result-img {
-            text-align: center;
-            margin-bottom: 16px;
-        }
-        .speedtest-result-img img {
-            max-width: 550px;
-            width: 100%;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-        }
-        pre {
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            font-family: 'Courier New', monospace;
-            font-size: 16px;
-            line-height: 1.4;
-            margin: 0;
-        }
-        .sys-item {
-          margin: 0 0 1em;    
-          line-height: 1.4;   
-        }        
-    </style>
+  <title>SpeedTest by OpenSpeedTest™</title>
+  <meta name="description"
+    content="Test your network speed now. HTML5 Network Performance Estimation Tool. Self-Hosted SpeedTest by OpenSpeedTest™"/>
+  <link href="assets/css/app.css" rel="stylesheet" type="text/css" />
+  <script> window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches&&(document.head.innerHTML+='<link id="darkmode" rel="stylesheet" href="assets/css/darkmode.css" type="text/css"/>');function getCookieValue(b,a){return(a=document.cookie.match("(^|;)\\s*"+b+"\\s*=\\s*([^;]+)"))?a.pop():""}if("light"===getCookieValue("mode")){var darkStyle=document.getElementById("darkmode");darkStyle&&darkStyle.parentNode.removeChild(darkStyle)}; </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta property="og:image" content="assets/images/img.png" />
+  <link rel='canonical' href='https://openspeedtest.com'/>
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/images/icons/favicon-16x16.png">
+  <link rel="manifest" href="assets/images/icons/site.webmanifest">
+  <link rel="mask-icon" href="assets/images/icons/safari-pinned-tab.svg" color="#5bbad5">
+  <link rel="shortcut icon" href="assets/images/icons/favicon.ico">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="msapplication-config" content="assets/images/icons/browserconfig.xml">
+  <meta name="theme-color" content="#ffffff">
+  <style>
+    #ost-toolbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 16px;
+      background: rgba(30, 30, 30, 0.92);
+      color: #e0e0e0;
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      gap: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+      backdrop-filter: blur(4px);
+    }
+    #ost-hostnames {
+      font-weight: bold;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      color: #7ecfff;
+    }
+    #ost-hostnames span {
+      color: #e0e0e0;
+      font-weight: normal;
+      margin: 0 6px;
+    }
+    #ost-size-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+    #ost-size-controls label {
+      color: #aaa;
+    }
+    #ost-size-select {
+      background: #333;
+      color: #e0e0e0;
+      border: 1px solid #555;
+      border-radius: 4px;
+      padding: 3px 6px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    #ost-apply-btn {
+      background: #0077cc;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 4px 12px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    #ost-apply-btn:hover { background: #005fa3; }
+    #ost-apply-btn:disabled { background: #555; cursor: not-allowed; }
+    #ost-status {
+      font-size: 12px;
+      color: #aaa;
+      min-width: 140px;
+      text-align: right;
+    }
+    #ost-status.ok  { color: #5fca5f; }
+    #ost-status.err { color: #e05555; }
+    /* Push OpenSpeedTest UI down so toolbar doesn't overlap */
+    /* padding-top set dynamically by JS below */
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>Asustor Open Speedtest</h1>
-            <!-- <p>Open Speedtest GUI for Asustor NAS</p> -->
-        </div>
 
-        <div class="info-panel">
-            <h3>System Information</h3>
-            <div id="systemInfo" class="system-info">Loading system information...</div>
-        </div>
-
-        <div class="smart-section">
-            <h2>Select Open Speedtest Server</h2>
-            
-            <!-- <label for="optionSelect">Choose Option:</label> -->
-            <select id="optionSelect">
-                <option value="" selected>Auto</option>
-            </select>
-
-            <div style="display:flex; align-items:center; gap:20px; margin-bottom:0;">
-                <button id="runBtn">RUN</button>
-                <button id="toggleBtn" style="display:none;">Show Text</button>
-            </div>
-
-            <div class="status info" id="status">Ready</div>
-
-            <div id="output" class="output">Click "RUN" button to execute Speedtest command...</div>
-            
-        </div>
+  <!-- Synology OpenSpeedTest toolbar -->
+  <div id="ost-toolbar">
+    <div id="ost-hostnames">
+      <span id="ost-nas">…</span>
+      &lt;———&gt;
+      <span id="ost-client">…</span>
     </div>
+    <div id="ost-size-controls">
+      <label for="ost-size-select">Test file:</label>
+      <select id="ost-size-select">
+        <option value="500">500 MB</option>
+        <option value="1000">1 GB</option>
+        <option value="1500">1.5 GB</option>
+        <option value="2000">2 GB</option>
+        <option value="3000">3 GB</option>
+        <option value="4000">4 GB</option>
+      </select>
+      <button id="ost-apply-btn">Apply</button>
+    </div>
+    <div id="ost-status">Loading…</div>
+  </div>
 
-    <script src="main.js"></script>
+  <script type="text/javascript">
+/*
+     Official Website : https://OpenSpeedTest.COM | Email: support@openspeedtest.com
+     Developed by : Vishnu | https://Vishnu.Pro | Email : me@vishnu.pro
+
+     HTML5 Network Performance Estimation Tool -> [JS,XHR,SVG,HTML,CSS]
+     Started in 2011 and Moved to OpenSpeedTest.COM, Dedicated Project/Domain Name in 2013.
+     SpeedTest Script -> 2013 -> Beta | 2015 -> V1 | 2019 ->V2 | 2020 V2.1 | 2021 V2.12 | 2022 V2.5 & 2.5.3
+     Self-Hosted OpenSpeedTest-Server (iFrame/Nginx) -> 2014. (Managed SelfHosted SpeedTesT Widget)
+     OpenSpeedTest-Server (On-premises) (Fully SelfHosted Apps)
+     [OpenSpeedTest-Server Docker Image] -> V1 2019 | V2 2020 | V2.1 2021 | V2.2 & 2.2.2 2022
+     [Node.js/Electron JS  OpenSpeedTest-Server Desktop Apps] -> 2020 V1 | 2021 V2 & V2.1 | 2.1.1 to 2.1.8 2022
+     [Ionic Android and iOS OpenSpeedTest-Server Mobile Apps] V1.2 to 1.5 2022
+
+     Download Now -> https://go.openspeedtest.com/Server
+
+     Like this Project? Please Donate NOW & Keep us Alive -> https://go.openspeedtest.com/Donate
+
+     Speed Test by OpenSpeedTest™️ is Free and Open-Source Software (FOSS) with MIT License.
+     Read full license terms -> http://go.openspeedtest.com/License
+
+     If you have any Questions, ideas or Comments Please Send it via -> https://go.openspeedtest.com/SendMessage
+*/
+
+    // Add or Remove Server --> Automatically choose the one with the least latency
+    var openSpeedTestServerList = [
+        {"ServerName":"Home", "Download":"downloading", "Upload":"upload", "ServerIcon":"DefaultIcon"}
+      ];
+
+    // Send pings 'pingSamples' times to each Server URL.
+        var pingSamples = 10;
+
+    // 50% samples(Least)/length 1=100% 0.1 = 10%
+        var jitterFinalSample = 0.5;
+
+    // Set a pingSample dynamically by passing "Ping" or "p" as a URL Parameter.
+        var setPingSamples = true;
+
+    // If Server has not responded within 5 Seconds for any requests we send ('pingSamples' times)
+    // We will show Network Error. You can change the limit here.
+    // In milliseconds, if you need to set 6 seconds. Change the value to 6000.
+        var pingTimeOut = 5000;
+
+    // Set a PingTimeout dynamically by passing "Out" or "O" as a URL Parameter 
+        var setPingTimeout = true;
+
+    // GET or HEAD  // Other Methods may work. but why?
+        var pingMethod = "GET";
+
+    //Choose Download or Upload from the Server list. If you Prefer Download, change pingMethod to HEAD.
+        var pingFile = "Upload";
+
+    // The amount of garbage data sent to the server in Mb, 30 = 30Mb
+        var ulDataSize = 30;
+
+    // Don't touch it
+        var ulDelay = 300;
+        var dlDelay = 300;
+
+    // Overhead Compensation factor, This is a browser-dependent test, Many Unknowns. Currently, 4%. That is within the margin of error.
+        var upAdjust = 1.04;
+        var dlAdjust = 1.04;
+
+   // You can pass "Clean" or "C" as a URL Parameter and reset the Overhead Compensation factor to Zero or set any value between 0 and 4. 1 = 1% to 4 = 4%
+   // "clean" will not accept values above 4, so Compensation is limited to a maximum of 4%.
+        var enableClean = true;
+
+    // Minimum 12 Seconds is Expected.
+        var dlDuration = 12;
+        var ulDuration = 12;
+
+    // 6 is the common limit found on most browsers.
+    // Choose  Number for parallel HTTP connections to Server | Default is 6
+        var dlThreads = 6;
+        var ulThreads = 6;
+
+    // Allow user to Change default limit of 6 parallel HTTP connections to Server  | Accept values above 1 and max 32
+    // pass "XHR" or "X" as a URL Parameter
+        var setHTTPReq = true;
+
+    // Save Data to a Database
+        var saveData = false;
+        var saveDataURL = "//yourDatabase.Server.com:4500/save?data=";
+
+    // Allow user to change the default 12 seconds test duration
+    // Pass "Stress" or "S" as a URL Parameter.
+        var stressTest = true;
+
+    // Allow user to select and run one test at a time, download, upload, or ping
+    // Pass "Test" or "T" as a URL Parameter.
+        var selectTest = true;
+
+    // Allow user to select a different server to run a test
+    // Pass "Host" or "H" ad a  URL Parameter.
+    // Accept only valid HTTP URLs like "http://192.168.1.10:3000" or "https://yourHost.com"
+        var selectServer = true;
+
+    // Start a test Automatically without pressing the start button
+    // You can Delay the test for 'n' seconds by passing any number as a value for Run Keyword. e.g.: "Run=10" or "R=10" to delay the test by 10 Seconds.
+    // Pass "Run" or "R" as a URL Parameter to start a test instantly.
+        var enableRun = true;
+
+    // "Run" will not work if you are already using 'selectTest' "Test" or "T" Keyword.
+
+function ostOnload() {
+      console.log("OpenSpeedTest.com V2.5.4 Loaded!")
+      console.log("Now Press the Start Button or HIT Enter.")
+      console.log("The secret to living happy is giving happiness. Have a wonderful day.")
+    }
+
+  var openChannel = "dev";
+
+  </script>
+
+<!--
+Speed Test by OpenSpeedTest™️ is Free and Open-Source Software with MIT License.
+
+You can play with the CSS, HTML & SVG files to change the colors or add your support desk info to this page.
+Also, you can add your company logo anywhere on this page. It's FOSS. You can do whatever you see fit.
+
+If you like to make any other modification to this application or need a custom deployment for your organization,
+please get in touch with support@openspeedtest.com.
+-->
+
+  <div id="loading_app" class="spinner">
+    <div class="bounce1"></div>
+    <div class="bounce2"></div>
+    <div class="bounce3"></div>
+  </div>
+  <object style="visibility:hidden" id="OpenSpeedTest-UI" data="assets/images/app.svg" type="image/svg+xml"></object>
+
+  <div class="Credits">
+    <a href="https://openspeedtest.com?ref=Self-Hosted&Run">SpeedTest by OpenSpeedTest™</a> is a Free and <a href="https://github.com/openspeedtest/Speed-Test">Open-Source HTML5 Network Speed Test</a> Software.
+    <p style="font-size: 12px;">&copy; Copyright 2013-2024 OpenSpeedTest™ All Rights Reserved.</p>
+  </div>
+
+  <script src="assets/js/app-2.5.4.min.js"></script>
+  <script src="assets/js/darkmode.js"></script>
+
+  <!-- Synology OpenSpeedTest toolbar logic -->
+  <script>
+  (function () {
+    var nasEl     = document.getElementById('ost-nas');
+    var clientEl  = document.getElementById('ost-client');
+    var sizeSelect = document.getElementById('ost-size-select');
+    var applyBtn  = document.getElementById('ost-apply-btn');
+    var statusEl  = document.getElementById('ost-status');
+
+    function callCGI(action, params, callback) {
+      var body = 'action=' + action;
+      if (params) {
+        Object.keys(params).forEach(function(k) {
+          body += '&' + k + '=' + encodeURIComponent(params[k]);
+        });
+      }
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', 'resize.cgi', true);
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+          try {
+            callback(null, JSON.parse(xhr.responseText));
+          } catch(e) {
+            callback(e, null);
+          }
+        }
+      };
+      xhr.send(body);
+    }
+
+    // Load info on page load
+    callCGI('info', null, function(err, data) {
+      if (err || !data || !data.success) {
+        nasEl.textContent = 'NAS';
+        clientEl.textContent = 'Client';
+        statusEl.textContent = 'Could not load info';
+        statusEl.className = 'err';
+        return;
+      }
+      nasEl.textContent = data.nas_hostname;
+      clientEl.textContent = data.client_ip;
+
+      // Select the matching file size option
+      var currentMB = data.current_size_mb;
+      var opts = sizeSelect.options;
+      var matched = false;
+      for (var i = 0; i < opts.length; i++) {
+        if (parseInt(opts[i].value) === currentMB) {
+          sizeSelect.selectedIndex = i;
+          matched = true;
+          break;
+        }
+      }
+      if (!matched) {
+        statusEl.textContent = 'File: ' + currentMB + ' MB';
+      } else {
+        statusEl.textContent = 'File: ' + currentMB + ' MB';
+      }
+      statusEl.className = 'ok';
+    });
+
+    // Apply button
+    applyBtn.addEventListener('click', function() {
+      var sizeMB = sizeSelect.value;
+      applyBtn.disabled = true;
+      statusEl.textContent = 'Resizing… please wait';
+      statusEl.className = '';
+
+      callCGI('resize', { size_mb: sizeMB }, function(err, data) {
+        applyBtn.disabled = false;
+        if (err || !data || !data.success) {
+          statusEl.textContent = (data && data.message) ? data.message : 'Resize failed';
+          statusEl.className = 'err';
+        } else {
+          statusEl.textContent = 'File: ' + data.size_mb + ' MB ✓';
+          statusEl.className = 'ok';
+        }
+      });
+    });
+    // Set body padding to match toolbar height, update on resize
+    function updatePadding() {
+      var toolbar = document.getElementById('ost-toolbar');
+      if (toolbar) {
+        document.body.style.paddingTop = toolbar.offsetHeight + 'px';
+      }
+    }
+    updatePadding();
+    window.addEventListener('resize', updatePadding);
+  })();
+  </script>
+
 </body>
 </html>

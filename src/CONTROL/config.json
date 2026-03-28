@@ -1,9 +1,8 @@
 {
   "general": {
     "package": "Open-speedtest",
-    "name": "Open Speedtest",
+    "name": "OpenSpeedTest",
     "version": "1.0.0",
-    "depends": ["python3"],
     "developer": "007revad",
     "maintainer": "007revad",
     "email": "007daver@gmail.com",
