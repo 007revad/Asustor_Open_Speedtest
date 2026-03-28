@@ -10,7 +10,7 @@ jobs:
     name: Build Package
     runs-on: ubuntu-latest
     permissions:
-      contents: write   # required for softprops/action-gh-release
+      contents: write   # required for softprops/action-gh-release 
 
     steps:
       - name: Checkout
