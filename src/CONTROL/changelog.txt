@@ -1,5 +1,5 @@
 v1.0.4
-- Bug for toolbar showing local IP address enclosed in [::ffff: and ].
+- Bug fix for toolbar showing local IP address enclosed in [::ffff: and ].
 
 v1.0.3
 - Removed dependency on python3.
