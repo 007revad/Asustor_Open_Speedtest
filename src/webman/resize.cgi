@@ -33,7 +33,12 @@ get_param() {
 
 ACTION=$(get_param "action")
 NAS_HOSTNAME=$(hostname 2>/dev/null || echo "NAS")
+
+# Strip IPv4-mapped IPv6 prefix (::ffff:) if present
 CLIENT_IP="${REMOTE_ADDR:-unknown}"
+CLIENT_IP="${CLIENT_IP#[}"        # strip leading [ from busybox http
+CLIENT_IP="${CLIENT_IP%]}"        # strip trailing ] from busybox http
+CLIENT_IP="${CLIENT_IP#::ffff:}"  # strip leading ::ffff: from busybox http
 
 case "$ACTION" in
     info)
