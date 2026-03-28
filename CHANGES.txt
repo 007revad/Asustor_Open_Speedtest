@@ -1,3 +1,12 @@
+v1.0.3
+- Removed dependancy on python3.
+- Added 250 MB test file size option.
+- Changed to reload the OpenSpeedTest UI after clicking Apply so you can run another test without reloading the web page.
+- Bug fix recreating the upload if you click Apply without selecting a different file size.
+
 v1.0.2
 - Updated description to include "LAN speed test.
 - Removed 30 MB uploading test file.
+
+v1.0.0
+- First release.

@@ -10,7 +10,7 @@ case "$1" in
             exit 0
         fi
         echo "Starting $NAME"
-        python3 "${PKG_DIR}/bin/httpd.py" 39877 "${PKG_DIR}/webman" \
+        busybox httpd -p 39877 -h "${PKG_DIR}/webman" -f \
             > "${PKG_DIR}/var/httpd.log" 2>&1 &
         echo $! > "$PIDFILE"
     ;;
@@ -21,7 +21,8 @@ case "$1" in
             rm -f "$PIDFILE"
         fi
         # Safety net in case pidfile is missing or stale
-        pkill -f "httpd.py" 2>/dev/null
+        # Kill only the instance bound to our port
+        pkill -f "busybox httpd -p 39877" 2>/dev/null
     ;;
     restart|force-reload)
         $0 stop

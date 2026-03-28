@@ -38,9 +38,6 @@ ln -sf ../resize.cgi "${PKG_ROOT}/webman/cgi-bin/resize.cgi"
 log_message "Created cgi-bin/resize.cgi symlink"
 
 # Set execute permissions for scripts
-chmod +x "${BIN_DIR}/httpd.py" 2>/dev/null && \
-    log_message "Set +x on bin/httpd.py" || \
-    { log_message "Warning: bin/httpd.py not found"; ERRORS=1; }
 chmod +x "${PKG_ROOT}/webman/resize.cgi" 2>/dev/null && \
     log_message "Set +x on webman/resize.cgi" || \
     { log_message "Warning: webman/resize.cgi not found"; ERRORS=1; }
