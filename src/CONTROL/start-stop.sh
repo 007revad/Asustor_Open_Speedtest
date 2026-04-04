@@ -1,7 +1,7 @@
 #!/bin/sh
 NAME="Open Speedtest"
 PKG_DIR="/usr/local/AppCentral/Open-speedtest"
-PIDFILE="${PKG_DIR}/var/httpd.pid"
+PIDFILE="${PKG_DIR}/var/lighttpd.pid"
 
 case "$1" in
     start)
@@ -10,19 +10,16 @@ case "$1" in
             exit 0
         fi
         echo "Starting $NAME"
-        busybox httpd -p 39877 -h "${PKG_DIR}/webman" -f \
-            > "${PKG_DIR}/var/httpd.log" 2>&1 &
-        echo $! > "$PIDFILE"
+        lighttpd -f "${PKG_DIR}/var/lighttpd.conf"
     ;;
     stop)
         echo "Stopping $NAME"
         if [ -f "$PIDFILE" ]; then
-            kill $(cat "$PIDFILE") 2>/dev/null
+            kill "$(cat "$PIDFILE")" 2>/dev/null
             rm -f "$PIDFILE"
         fi
         # Safety net in case pidfile is missing or stale
-        # Kill only the instance bound to our port
-        pkill -f "busybox httpd -p 39877" 2>/dev/null
+        pkill -f "lighttpd -f ${PKG_DIR}/var/lighttpd.conf" 2>/dev/null
     ;;
     restart|force-reload)
         $0 stop

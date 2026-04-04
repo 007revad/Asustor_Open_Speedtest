@@ -2,10 +2,8 @@
 
 PKG_NAME="Open-speedtest"
 PKG_ROOT="/usr/local/AppCentral/${PKG_NAME}"
-BIN_DIR="${PKG_ROOT}/bin"
 VAR_DIR="${PKG_ROOT}/var"
 LOG_FILE="${VAR_DIR}/install.log"
-ARCH="$(uname -m)"
 
 log_message() {
     mkdir -p "${VAR_DIR}"
@@ -23,24 +21,36 @@ else
     exit 1
 fi
 
-# Create 30MB download test file
+# Create 500MB download test file
 DOWNLOAD_FILE="${PKG_ROOT}/webman/downloading"
 if dd if=/dev/zero of="$DOWNLOAD_FILE" bs=1M count=500 2>/dev/null; then
-    log_message "Created 30MB downloading test file"
+    log_message "Created 500MB downloading test file"
 else
     log_message "Error: Failed to create downloading test file"
     exit 1
 fi
 
-# Create cgi-bin symlink for Python HTTP server CGI support
-mkdir -p "${PKG_ROOT}/webman/cgi-bin"
-ln -sf ../resize.cgi "${PKG_ROOT}/webman/cgi-bin/resize.cgi"
-log_message "Created cgi-bin/resize.cgi symlink"
+# Create lighttpd config
+cat > "${VAR_DIR}/lighttpd.conf" << EOF
+server.modules = ( "mod_cgi" )
+server.document-root = "${PKG_ROOT}/webman"
+server.port = 39877
+server.pid-file = "${VAR_DIR}/lighttpd.pid"
+server.errorlog = "${VAR_DIR}/httpd.log"
+index-file.names = ( "index.html" )
+cgi.assign = ( ".cgi" => "" )
+static-file.exclude-extensions = ( ".cgi" )
+EOF
+chmod 644 "${VAR_DIR}/lighttpd.conf"
+log_message "Created lighttpd.conf"
 
 # Set execute permissions for scripts
 chmod +x "${PKG_ROOT}/webman/resize.cgi" 2>/dev/null && \
     log_message "Set +x on webman/resize.cgi" || \
     { log_message "Warning: webman/resize.cgi not found"; ERRORS=1; }
+chmod +x "${PKG_ROOT}/webman/upload.cgi" 2>/dev/null && \
+    log_message "Set +x on webman/upload.cgi" || \
+    { log_message "Warning: webman/upload.cgi not found"; ERRORS=1; }
 
 if [ -z "${ERRORS}" ]; then
     log_message "Post-installation completed successfully"

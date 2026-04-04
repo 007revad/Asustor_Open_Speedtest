@@ -1,3 +1,6 @@
+v1.0.5
+- Changed from using busybox httpd to lighttpd to improve upload speed accuracy.
+
 v1.0.4
 - Bug fix for toolbar showing local IP address enclosed in [::ffff: and ].
 
