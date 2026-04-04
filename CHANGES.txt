@@ -3,6 +3,8 @@ v1.0.6
 
 v1.0.5
 - Changed from using busybox httpd to lighttpd to improve upload speed accuracy.
+- Fixed upload speed test (replaced BusyBox httpd with lighttpd for CGI POST support)
+- Added upload.cgi to handle upload speed measurement correctly
 
 v1.0.4
 - Bug fix for toolbar showing local IP address enclosed in [::ffff: and ].
