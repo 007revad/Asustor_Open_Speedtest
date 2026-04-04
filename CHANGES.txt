@@ -1,3 +1,6 @@
+v1.0.6
+- Bug fix for toolbar info.
+
 v1.0.5
 - Changed from using busybox httpd to lighttpd to improve upload speed accuracy.
 
